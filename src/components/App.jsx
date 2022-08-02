@@ -8,12 +8,17 @@ import MovieInfo from './MovieInfo/MovieInfo';
 import NavigationBar from './NavigationBar/NavigationBar';
 import Profile from './Profile/Profile';
 
+import useStyles from './styles';
+
 function App() {
+  const classes = useStyles();
+
   return (
-    <div>
+    <div className={classes.root}>
       <CssBaseline />
       <NavigationBar />
-      <main>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
         <Routes>
           <Route path="/" element={<Movies />} />
           <Route path="/movie/:id" element={<MovieInfo />} />
