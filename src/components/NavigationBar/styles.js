@@ -1,23 +1,33 @@
 import { makeStyles } from '@mui/styles';
 
-// return an object with the styles
 export default makeStyles((theme) => ({
-  toolbar: {
-    display: 'flex',
-    height: '80px',
-    justifyContent: 'space-between',
-    marginLeft: '240px',
-    [theme.breakpoints.down('sm')]: {
-      marginLeft: '0px',
-      flexWrap: 'wrap',
-    },
+  [theme.breakpoints.down('sm')]: {
+    marginLeft: '0px',
+    flexWrap: 'wrap',
   },
 
+  linkButton: {
+    '&:hover': {
+      color: 'white !important',
+      textDecoration: 'none',
+    },
+  },
   menuButton: {
     marginRight: theme.spacing(2), // 8*2 = 16px
+
     // hide the button if it bigger than sm (mobile)
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
+  },
+  drawer: {
+    [theme.breakpoints.up('sm')]: {
+      // using a variable to make the drawer width dynamic
+      width: '240px',
+      flexShrink: 0,
+    },
+  },
+  drawerPaper: {
+    width: '240px',
   },
 }));
