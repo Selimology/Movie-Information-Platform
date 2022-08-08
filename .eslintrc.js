@@ -33,6 +33,6 @@ module.exports = {
     'linebreak-style': 0,
     'react/jsx-one-expression-per-line': 0,
     'react/jsx-filename-extension': 0,
-    'comma-dangle': ['error', { functions: 'ignore' }],
+    'comma-dangle': [2, 'always-multiline'],
   },
 };
