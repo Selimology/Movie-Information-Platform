@@ -80,7 +80,7 @@ function NavigationBar() {
           {isMobileDev ? (
             <Drawer
               variant="temporary"
-              anchor="left"
+              anchor="right"
               classes={{ paper: classes.drawerPaper }}
               open={mobileOpen}
               onClose={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}

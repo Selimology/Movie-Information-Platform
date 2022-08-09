@@ -1,11 +1,16 @@
 import { makeStyles } from '@mui/styles';
 
 export default makeStyles((theme) => ({
-  [theme.breakpoints.down('sm')]: {
-    marginLeft: '0px',
-    flexWrap: 'wrap',
+  toolbar: {
+    height: '80px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginLeft: '240px',
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: '0px',
+      flexWrap: 'wrap',
+    },
   },
-
   linkButton: {
     '&:hover': {
       color: 'white !important',
