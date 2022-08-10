@@ -12,9 +12,11 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './styles';
 import { useGetGenresQuery } from '../../services/TMDB';
+import { selectCategory } from '../../features/currentCategory';
 
 const categories = [
   { label: 'Popular', value: 'popular' },
@@ -26,6 +28,8 @@ const firstLogo = '/cinemalogored.png';
 const secondLogo = '/cinemalogosblack.png';
 
 function Sidebar({ setMobileOpen }) {
+  const dispatch = useDispatch();
+
   const { data, isFetching } = useGetGenresQuery();
   const classes = useStyles();
   const theme = useTheme();
@@ -45,7 +49,7 @@ function Sidebar({ setMobileOpen }) {
         <ListSubheader>Categories</ListSubheader>
         {categories.map(({ label, value }) => (
           <Link key={value} className={classes.links} to="/">
-            <ListItem onClick={() => {}} button>
+            <ListItem onClick={() => dispatch(selectCategory(value))} button>
               {/* <ListItemIcon>
                 <img
                   src={firstLogo}
@@ -68,7 +72,7 @@ function Sidebar({ setMobileOpen }) {
         ) : (
           data.genres.map(({ name, id }) => (
             <Link key={name} className={classes.links} to="/">
-              <ListItem onClick={() => {}} button>
+              <ListItem onClick={() => dispatch(selectCategory(id))} button>
                 {/* <ListItemIcon>
                 <img
                   src={firstLogo}
