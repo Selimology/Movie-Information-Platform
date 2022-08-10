@@ -8,6 +8,18 @@ import store from './app/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+// Change the theme color to match my needs
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: '_______',
+//     },
+//   },
+//   secondary: {
+//     main: '_______',
+//   },
+// });
+
 const theme = createTheme({});
 root.render(
   <Provider store={store}>

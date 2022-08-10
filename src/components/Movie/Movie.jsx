@@ -8,10 +8,30 @@ function Movie({ movie, index }) {
 
   console.log(movie, index);
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3} className={classes.movie}>
-      <Typography variant="h6" className={classes.movieTitle}>
-        {movie.title}
-      </Typography>
+    <Grid item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.movie}>
+      {/* each rows shows after 300 , 600, 900... */}
+      <Grow in key={index} timeout={(index + 1) * 300}>
+        <Link className={classes.movieLinks} to={`/movie/${movie.id}`}>
+          <img
+            className={classes.movieImage}
+            alt={movie.title}
+            src={
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w400/${movie.poster_path}`
+                : 'https://imgur.com/xvpUHUd'
+            }
+          />
+          <Typography variant="h6" className={classes.movieTitle}>
+            {movie.title}
+          </Typography>
+          <Tooltip disableTouchListener title={`${movie.vote_average} / 10`}>
+            <div>
+              {/* movie.vote_average returns a out of 10 value */}
+              <Rating value={movie.vote_average / 2} readOnly precision={0.1} />
+            </div>
+          </Tooltip>
+        </Link>
+      </Grow>
     </Grid>
   );
 }
