@@ -14,27 +14,19 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
 import useStyles from './styles';
+import { useGetGenresQuery } from '../../services/TMDB';
 
 const categories = [
   { label: 'Popular', value: 'popular' },
   { label: 'Top Rated', value: 'top_rated' },
   { label: 'Upcoming', value: 'upcoming' },
 ];
-const genreCategories = [
-  { label: 'Action', value: 'action' },
-  { label: 'Adventure', value: 'adventure' },
-  { label: 'Animation', value: 'horror' },
-  { label: 'Comedy', value: 'comedy' },
-  { label: 'Crime', value: 'crime' },
-  { label: 'Documentary', value: 'documentary' },
-  { label: 'Drama', value: 'drama' },
-  { label: 'Family', value: 'family' },
-];
 
 const firstLogo = '/cinemalogored.png';
 const secondLogo = '/cinemalogosblack.png';
 
 function Sidebar({ setMobileOpen }) {
+  const { data, isFetching } = useGetGenresQuery();
   const classes = useStyles();
   const theme = useTheme();
 
@@ -68,21 +60,27 @@ function Sidebar({ setMobileOpen }) {
       </List>
       <Divider />
       <List>
-        <ListSubheader>Genre</ListSubheader>
-        {genreCategories.map(({ label, value }) => (
-          <Link key={value} className={classes.links} to="/">
-            <ListItem onClick={() => {}} button>
-              {/* <ListItemIcon>
+        <ListSubheader>Genres</ListSubheader>
+        {isFetching ? (
+          <Box display="flex" justifyContent="center">
+            <CircularProgress size="3rem" />
+          </Box>
+        ) : (
+          data.genres.map(({ name, id }) => (
+            <Link key={name} className={classes.links} to="/">
+              <ListItem onClick={() => {}} button>
+                {/* <ListItemIcon>
                 <img
                   src={firstLogo}
                   classes={classes.genreImages}
                   height={30}
                 />
               </ListItemIcon> */}
-              <ListItemText primary={label} />
-            </ListItem>
-          </Link>
-        ))}
+                <ListItemText primary={name} />
+              </ListItem>
+            </Link>
+          ))
+        )}
       </List>
     </>
   );
