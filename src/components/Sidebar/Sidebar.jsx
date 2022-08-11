@@ -29,7 +29,7 @@ const secondLogo = '/cinemalogosblack.png';
 
 function Sidebar({ setMobileOpen }) {
   const dispatch = useDispatch();
-
+  const { categoryName } = useSelector((state) => state.currentCategory);
   const { data, isFetching } = useGetGenresQuery();
   const classes = useStyles();
   const theme = useTheme();

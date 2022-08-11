@@ -8,7 +8,7 @@ function Movie({ movie, index }) {
 
   console.log(movie, index);
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.movie}>
+    <Grid item xs={12} sm={6} md={4} lg={3} xl={3} className={classes.movie}>
       {/* each rows shows after 300 , 600, 900... */}
       <Grow in key={index} timeout={(index + 1) * 300}>
         <Link className={classes.movieLinks} to={`/movie/${movie.id}`}>

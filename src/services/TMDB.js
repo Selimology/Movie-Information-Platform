@@ -4,8 +4,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 // https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=en-US&page=1
 
 const tmdbApiKey = process.env.REACT_APP_TMDB_KEY;
-// dummy info
-const page = 1;
 
 // Define a service using a base URL and expected endpoints
 export const tmdbApi = createApi({
@@ -16,9 +14,22 @@ export const tmdbApi = createApi({
     getGenres: builder.query({
       query: () => `genre/movie/list?api_key=${tmdbApiKey}`,
     }),
-    // Get popular movies
     getMovies: builder.query({
-      query: () => `movie/popular?page=${page}&api_key=${tmdbApiKey}`,
+      query: ({ categoryName, page }) => {
+        // popular, top_rated, and upcoming are string
+        // genres are number
+
+        if (categoryName && typeof categoryName === 'string') {
+          return `movie/${categoryName}?page=${page}&api_key=${tmdbApiKey}`;
+        }
+
+        if (categoryName && typeof categoryName === 'number') {
+          return `discover/movie?api_key=${tmdbApiKey}&page=${page}&with_genres=${categoryName}`;
+        }
+
+        //  Get popular movies
+        return `movie/popular?page=${page}&api_key=${tmdbApiKey}`;
+      },
     }),
   }),
 });
