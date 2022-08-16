@@ -18,24 +18,27 @@ import {
 import { useTheme } from '@mui/material/styles';
 
 import { Link } from 'react-router-dom';
-
+import { useDispatch, useSelector } from 'react-redux';
 import useStyles from './styles';
 import { fetchToken, createSessionId, moviesApi } from '../../utils';
 
 import Sidebar from '../Sidebar/Sidebar';
 import Searchbar from '../Searchbar/Searchbar';
+import { setUser, userSelector } from '../../features/auth';
 
 function NavigationBar() {
+  const { isAuthenticated, user } = useSelector(userSelector);
   // useStyles() returns an object with the styles for mui
   const [mobileOpen, setMobileOpen] = useState(false);
   const classes = useStyles();
   const theme = useTheme();
-
-  const isAuthenticated = false;
+  const dispatch = useDispatch();
   const isMobileDev = useMediaQuery('(max-width:600px)');
 
   const token = localStorage.getItem('request_token');
   const sessionIdFromLocalStorage = localStorage.getItem('session_id');
+
+  console.log(user);
 
   useEffect(() => {
     const logInTheUser = async () => {
@@ -44,14 +47,17 @@ function NavigationBar() {
           const { data: userData } = await moviesApi.get(
             `/account?session_id=${sessionIdFromLocalStorage}`
           );
+          dispatch(setUser(userData));
         } else {
           const sessionId = await createSessionId();
           const { data: userData } = await moviesApi.get(
             `/account?session_id=${sessionId}`
           );
+          dispatch(setUser(userData));
         }
       }
     };
+    logInTheUser();
   }, [token]);
 
   return (
@@ -85,7 +91,7 @@ function NavigationBar() {
                 color="inherit"
                 onClick={() => {}}
                 component={Link}
-                to="/profile/:id"
+                to={`/profile/${user.id}`}
                 className={classes.linkButton}
               >
                 {!isMobileDev && <>My Movies &nbsp; </>}
