@@ -33,6 +33,10 @@ function MovieInfo() {
   const { data, isFetching, error } = useGetSingleMovieQuery(id);
   const dispatch = useDispatch();
   const classes = useStyles();
+  const isMovieFavorited = true;
+  const isMovieWatchListed = true;
+  const addToFavorite = () => {};
+  const addToWatchList = () => {};
   console.log(data);
 
   if (isFetching) {
@@ -97,6 +101,104 @@ function MovieInfo() {
               </Typography>
             </Link>
           ))}
+        </Grid>
+        <Typography variant="h5" gutterBottom style={{ marginTop: '10px' }}>
+          Overview
+        </Typography>
+        <Typography style={{ marginBottom: '1rem' }}>
+          {data?.overview}
+        </Typography>
+        <Typography variant="h5" gutterBottom>
+          Top Cast
+        </Typography>
+        <Grid item container spacing={2}>
+          {data &&
+            data.credits.cast
+              .map(
+                (cast, index) =>
+                  cast.profile_path && (
+                    <Grid
+                      item
+                      container
+                      component={Link}
+                      to={`/actors/${cast.id}`}
+                      key={index}
+                      xs={4}
+                      md={2}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <img
+                        className={classes.castImage}
+                        src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
+                        alt={cast.name}
+                      />
+                      <Typography color="textPrimary">{cast?.name}</Typography>
+                      <Typography color="textSecondary">
+                        {cast.character.split('/'[0])}
+                      </Typography>
+                    </Grid>
+                  )
+              )
+              .slice(0, 6)}
+        </Grid>
+        <Grid item style={{ marginTop: '2rem' }} container>
+          <div className={classes.buttonsContainer}>
+            <Grid className={classes.buttonContainer} item xs={12} sm={6}>
+              <ButtonGroup size="medium" variant="outlined">
+                <Button
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={data?.homepage}
+                  endIcon={<Language />}
+                >
+                  Website
+                </Button>
+                <Button
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`https://www.imdb.com/title/${data?.imdb_id}`}
+                  endIcon={<MovieIcon />}
+                >
+                  IMDB
+                </Button>
+                <Button onClick={() => {}} href="#" endIcon={<Theaters />}>
+                  Trailer
+                </Button>
+              </ButtonGroup>
+            </Grid>
+            <Grid className={classes.buttonContainer} item xs={12} sm={6}>
+              <ButtonGroup size="medium" variant="outlined">
+                <Button
+                  onClick={addToFavorite}
+                  endIcon={
+                    isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />
+                  }
+                >
+                  {isMovieFavorited ? 'Unfavorite' : 'Favorite'}
+                </Button>
+                <Button
+                  onClick={addToWatchList}
+                  endIcon={isMovieWatchListed ? <Remove /> : <PlusOne />}
+                >
+                  {isMovieWatchListed ? 'WatchList' : 'Add to watchlist'}
+                </Button>
+                <Button
+                  endIcon={<ArrowBack />}
+                  sx={{ borderColor: 'primary.main' }}
+                >
+                  <Typography
+                    component={Link}
+                    to="/"
+                    variant="subtitle2"
+                    color="inherit"
+                    style={{ textDecoration: 'none' }}
+                  >
+                    Back
+                  </Typography>
+                </Button>
+              </ButtonGroup>
+            </Grid>
+          </div>
         </Grid>
       </Grid>
     </Grid>
