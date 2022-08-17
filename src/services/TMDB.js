@@ -36,9 +36,14 @@ export const tmdbApi = createApi({
         return `movie/popular?page=${page}&api_key=${tmdbApiKey}`;
       },
     }),
+    getSingleMovie: builder.query({
+      query: (id) =>
+        `movie/${id}?append_to_response=videos,credits&api_key=${tmdbApiKey}`,
+    }),
   }),
 });
 
 // hook is created since query is created with createApi
 // format is {use} + service name + endpoint name
-export const { useGetMoviesQuery, useGetGenresQuery } = tmdbApi;
+export const { useGetMoviesQuery, useGetGenresQuery, useGetSingleMovieQuery } =
+  tmdbApi;
