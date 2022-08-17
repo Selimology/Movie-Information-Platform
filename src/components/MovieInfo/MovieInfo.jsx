@@ -23,22 +23,32 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import { useGetSingleMovieQuery } from '../../services/TMDB';
+import {
+  useGetSingleMovieQuery,
+  useGetRecommendatedMoviesQuery,
+} from '../../services/TMDB';
 import { selectCategory } from '../../features/currentCategory';
 import useStyles from './styles';
+import MovieList from '../MovieList/MovieList';
 
 function MovieInfo() {
   // useParams shall be on top!
   const { id } = useParams();
   const { data, isFetching, error } = useGetSingleMovieQuery(id);
+
+  const { data: recommendations, isFetching: isRecommendationsFetching } =
+    useGetRecommendatedMoviesQuery({
+      movie_id: id,
+      list: 'recommendations',
+    });
   const dispatch = useDispatch();
   const classes = useStyles();
   const isMovieFavorited = true;
   const isMovieWatchListed = true;
   const addToFavorite = () => {};
   const addToWatchList = () => {};
-  console.log(data);
 
+  console.log(recommendations);
   if (isFetching) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center">
@@ -201,6 +211,18 @@ function MovieInfo() {
           </div>
         </Grid>
       </Grid>
+      <Box marginTop="5rem" width="100%">
+        <Typography variant="h4" gutterBottom align="center">
+          You might like
+        </Typography>
+        {recommendations ? (
+          <MovieList numberOfMovies={8} movies={recommendations} />
+        ) : (
+          <Box display="flex" justifyContent="center" alignItems="center">
+            Sorry no recommendation
+          </Box>
+        )}
+      </Box>
     </Grid>
   );
 }
