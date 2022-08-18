@@ -38,8 +38,6 @@ function NavigationBar() {
   const token = localStorage.getItem('request_token');
   const sessionIdFromLocalStorage = localStorage.getItem('session_id');
 
-  console.log(user);
-
   useEffect(() => {
     const logInTheUser = async () => {
       if (token) {
