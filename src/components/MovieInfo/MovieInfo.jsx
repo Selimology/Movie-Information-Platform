@@ -182,8 +182,13 @@ function MovieInfo() {
               </ButtonGroup>
             </Grid>
             <Grid className={classes.buttonContainer} item xs={12} sm={6}>
-              <ButtonGroup size="medium" variant="outlined">
+              <ButtonGroup
+                className={classes.buttonGroup}
+                size={sizeofButtons}
+                variant="outlined"
+              >
                 <Button
+                  href="#"
                   onClick={addToFavorite}
                   endIcon={
                     isMovieFavorited ? <FavoriteBorderOutlined /> : <Favorite />
@@ -193,18 +198,19 @@ function MovieInfo() {
                 </Button>
                 <Button
                   onClick={addToWatchList}
+                  href="#"
                   endIcon={isMovieWatchListed ? <Remove /> : <PlusOne />}
                 >
                   {isMovieWatchListed ? 'WatchList' : 'Add to watchlist'}
                 </Button>
                 <Button
                   endIcon={<ArrowBack />}
-                  sx={{ borderColor: 'primary.main' }}
+                  sx={{ borderColor: 'primary.main', border: '1px solid' }}
                 >
                   <Typography
                     component={Link}
                     to="/"
-                    variant="subtitle2"
+                    variant="inherit"
                     color="inherit"
                     style={{ textDecoration: 'none' }}
                   >
