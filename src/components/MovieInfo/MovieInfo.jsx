@@ -82,7 +82,7 @@ function MovieInfo() {
         </Typography>
         <Grid item className={classes.spaceAroundContainer}>
           <Box display="flex" align="center">
-            <Rating readOnly value={data.vote_average / 2} />
+            <Rating readOnly precision={0.1} value={data.vote_average / 2} />
             <Typography
               variant="subtitle1"
               gutterBottom
