@@ -5,7 +5,6 @@ import useStyles from './styles';
 
 function Pagination({ currentPage, setPage, totalPages }) {
   const classes = useStyles();
-  const currentPageNumber = 1;
 
   const handlePreviousPage = () => {
     if (currentPage !== 1) {

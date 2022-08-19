@@ -48,6 +48,11 @@ function MovieInfo() {
   const addToFavorite = () => {};
   const addToWatchList = () => {};
   const [open, setOpen] = useState(false);
+  const smallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+  const largeScreen = useMediaQuery((theme) => theme.breakpoints.down('lg'));
+
+  const sizeofButtons = smallScreen ? 'small' : 'medium';
+  const numberOfMovies = largeScreen ? '6' : '8';
 
   if (isFetching) {
     return (
@@ -65,7 +70,12 @@ function MovieInfo() {
   }
   return (
     <Grid container className={classes.spaceAroundContainer}>
-      <Grid item sm={12} lg={4}>
+      <Grid
+        item
+        sm={12}
+        lg={4}
+        style={{ display: 'flex', justifyContent: 'center' }}
+      >
         <img
           className={classes.moviePoster}
           src={`https://image.tmdb.org/t/p/w500/${data?.poster_path}
@@ -88,7 +98,7 @@ function MovieInfo() {
               gutterBottom
               style={{ marginLeft: '20px' }}
             >
-              {data?.vote_average} / 10
+              {Math.round(data?.vote_average * 10) / 10} / 10
             </Typography>
           </Box>
           <Typography variant="h6" align="center" gutterBottom>
@@ -154,7 +164,7 @@ function MovieInfo() {
         <Grid item style={{ marginTop: '2rem' }} container>
           <div className={classes.buttonsContainer}>
             <Grid className={classes.buttonContainer} item xs={12} sm={6}>
-              <ButtonGroup size="medium" variant="outlined">
+              <ButtonGroup size={sizeofButtons} variant="outlined">
                 <Button
                   target="_blank"
                   rel="noopener noreferrer"
@@ -227,7 +237,7 @@ function MovieInfo() {
           You might like
         </Typography>
         {recommendations ? (
-          <MovieList numberOfMovies={8} movies={recommendations} />
+          <MovieList numberOfMovies={numberOfMovies} movies={recommendations} />
         ) : (
           <Box display="flex" justifyContent="center" alignItems="center">
             Sorry no recommendation

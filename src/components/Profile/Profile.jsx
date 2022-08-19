@@ -15,7 +15,7 @@ function Profile() {
     window.location.href = '/';
   };
   return (
-    <Box>
+    <Box style={{ padding: '0 20px' }}>
       <Box display="flex" justifyContent="space-between">
         <Typography variant="h4" gutterBottom>
           My Profile

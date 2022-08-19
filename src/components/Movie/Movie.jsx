@@ -24,7 +24,10 @@ function Movie({ movie, index }) {
           <Typography variant="h6" className={classes.movieTitle}>
             {movie.title}
           </Typography>
-          <Tooltip disableTouchListener title={`${movie.vote_average} / 10`}>
+          <Tooltip
+            disableTouchListener
+            title={`${Math.round(movie.vote_average * 10) / 10} / 10`}
+          >
             <div>
               {/* movie.vote_average returns a out of 10 value */}
               <Rating value={movie.vote_average / 2} readOnly precision={0.1} />
