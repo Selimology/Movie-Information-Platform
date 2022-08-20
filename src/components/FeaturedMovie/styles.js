@@ -31,7 +31,9 @@ export default makeStyles((theme) => ({
   cardContent: {
     color: '#fff',
     display: 'flex',
-    width: '50%',
+    width: '65%',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
     flexDirection: 'column',
     [theme.breakpoints.down('sm')]: {
       width: '100%',

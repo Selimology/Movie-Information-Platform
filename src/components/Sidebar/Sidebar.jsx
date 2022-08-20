@@ -34,6 +34,10 @@ function Sidebar({ setMobileOpen }) {
   const classes = useStyles();
   const theme = useTheme();
 
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [categoryName]);
+
   return (
     <>
       {/* Logo */}
