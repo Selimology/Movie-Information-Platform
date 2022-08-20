@@ -24,8 +24,8 @@ const categories = [
   { label: 'Upcoming', value: 'upcoming' },
 ];
 
-const firstLogo = '/cinemalogored.png';
-const secondLogo = '/cinemalogosblack.png';
+const secondLogo = '/cinemadark.png';
+const firstLogo = '/cinemalogosblack.png';
 
 function Sidebar({ setMobileOpen }) {
   const dispatch = useDispatch();
@@ -50,13 +50,6 @@ function Sidebar({ setMobileOpen }) {
         {categories.map(({ label, value }) => (
           <Link key={value} className={classes.links} to="/">
             <ListItem onClick={() => dispatch(selectCategory(value))} button>
-              {/* <ListItemIcon>
-                <img
-                  src={firstLogo}
-                  classes={classes.genreImages}
-                  height={30}
-                />
-              </ListItemIcon> */}
               <ListItemText primary={label} />
             </ListItem>
           </Link>
@@ -73,13 +66,6 @@ function Sidebar({ setMobileOpen }) {
           data.genres.map(({ name, id }) => (
             <Link key={name} className={classes.links} to="/">
               <ListItem onClick={() => dispatch(selectCategory(id))} button>
-                {/* <ListItemIcon>
-                <img
-                  src={firstLogo}
-                  classes={classes.genreImages}
-                  height={30}
-                />
-              </ListItemIcon> */}
                 <ListItemText primary={name} />
               </ListItem>
             </Link>

@@ -223,7 +223,6 @@ function MovieInfo() {
                 <Button
                   target="_blank"
                   rel="noopener noreferrer"
-                  color="primary"
                   href={`https://www.imdb.com/title/${data?.imdb_id}`}
                   endIcon={<MovieIcon />}
                 >

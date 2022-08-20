@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   AppBar,
   IconButton,
@@ -19,6 +19,7 @@ import { useTheme } from '@mui/material/styles';
 
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { ColorModeContext } from '../../utils/ToggleColorMode';
 import useStyles from './styles';
 import { fetchToken, createSessionId, moviesApi } from '../../utils';
 
@@ -32,6 +33,7 @@ function NavigationBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const classes = useStyles();
   const theme = useTheme();
+  const colorMode = useContext(ColorModeContext);
   const dispatch = useDispatch();
   const isMobileDev = useMediaQuery('(max-width:600px)');
 
@@ -75,7 +77,11 @@ function NavigationBar() {
             </IconButton>
           )}
           {/* Darkmode/LightMode */}
-          <IconButton color="inherit" sx={{ ml: 1 }} onClick={() => {}}>
+          <IconButton
+            color="inherit"
+            sx={{ ml: 1 }}
+            onClick={colorMode.toggleColorMode}
+          >
             {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
           {!isMobileDev && <Searchbar />}
