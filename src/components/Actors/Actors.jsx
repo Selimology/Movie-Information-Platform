@@ -41,8 +41,13 @@ function Actors() {
 
   return (
     <>
-      <Grid container spacing={3}>
-        <Grid item lg={5} xl={4}>
+      <Grid container spacing={3} className={classes.spaceAroundContainer}>
+        <Grid
+          item
+          sm={12}
+          lg={4}
+          style={{ display: 'flex', justifyContent: 'center' }}
+        >
           <img
             src={`https://image.tmdb.org/t/p/w500/${data?.profile_path}
         `}

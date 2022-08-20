@@ -9,7 +9,6 @@ export const category = createSlice({
   },
   reducers: {
     selectCategory: (state, action) => {
-      console.log(action.payload);
       state.categoryName = action.payload;
       state.searchQuery = '';
     },

@@ -1,6 +1,16 @@
 import { makeStyles } from '@mui/styles';
 
 export default makeStyles((theme) => ({
+  spaceAroundContainer: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    padding: '20px',
+
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+      flexWrap: 'wrap',
+    },
+  },
   actorImage: {
     borderRadius: '50px',
     boxShadow: '0.5em 0.8em 1em rgb(0, 0, 0, 0.5)',
