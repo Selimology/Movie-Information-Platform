@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   CircularProgress,
@@ -8,20 +8,23 @@ import {
 import { useSelector } from 'react-redux';
 import { useGetMoviesQuery } from '../../services/TMDB';
 import MovieList from '../MovieList/MovieList';
-import { selectCategory } from '../../features/currentCategory';
 import Pagination from '../Pagination/Pagination';
+import FeaturedMovie from '../FeaturedMovie/FeaturedMovie';
 
 function Movies() {
   const [page, setPage] = useState(1);
   const { categoryName, searchQuery } = useSelector(
     (state) => state.currentCategory
   );
+
   const { data, error, isFetching } = useGetMoviesQuery({
     categoryName,
     page,
     searchQuery,
   });
-  console.log(data);
+
+  const largeScreen = useMediaQuery((theme) => theme.breakpoints.only('lg'));
+  const numberOfMovies = largeScreen ? '9' : '13';
 
   if (isFetching) {
     return (
@@ -49,7 +52,8 @@ function Movies() {
   }
   return (
     <div>
-      <MovieList movies={data} numberOfMovies={12} />
+      <FeaturedMovie movie={data.results[0]} />
+      <MovieList movies={data} excludeFirst numberOfMovies={numberOfMovies} />
       <Pagination
         currentPage={page}
         setPage={setPage}

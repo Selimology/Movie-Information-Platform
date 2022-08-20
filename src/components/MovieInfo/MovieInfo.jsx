@@ -63,10 +63,8 @@ function MovieInfo() {
 
   const [open, setOpen] = useState(false);
   const smallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
-  const largeScreen = useMediaQuery((theme) => theme.breakpoints.down('lg'));
 
   const sizeofButtons = smallScreen ? 'small' : 'medium';
-  const numberOfMovies = largeScreen ? '6' : '8';
 
   //  !! {} -> false -> true
   // !! '' -> true-> false
@@ -283,7 +281,7 @@ function MovieInfo() {
           You might like
         </Typography>
         {recommendations ? (
-          <MovieList numberOfMovies={numberOfMovies} movies={recommendations} />
+          <MovieList numberOfMovies={8} movies={recommendations} />
         ) : (
           <Box display="flex" justifyContent="center" alignItems="center">
             Sorry no recommendation
