@@ -20,4 +20,9 @@ $ npm install
 $ npm run dev
 ```
 
-Create a `.env` file similar to `.env.example` and include the appropriate keys.
+Include the appropriate keys in the .env .
+
+## Env File Shall Include
+```bash
+REACT_APP_TMDB_KEY=
+```
