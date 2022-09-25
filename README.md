@@ -4,7 +4,6 @@
 
 Hey there! This a movie and tv show information platform where you can find all the necessary information about your favorite movie. You can find about the description, genre, actors, direct website, trailer video and even similar movies through the recommendations. The best part is , the movie is frequently updated.
 
-<img src="https://github.com/Selimology/personal-portfolio/blob/e4e77c88d3bb3b2120f233774b06756f05377d83/src/assets/projectCover.png" alt="A preview of the movie information platform" width="900px"></img>
 
 - **Framework**: [React.js](https://reactjs.org/)
 - **Styling**: [MUI5](https://mui.com/)
@@ -12,7 +11,7 @@ Hey there! This a movie and tv show information platform where you can find all 
 - **State Management**: [Redux](https://redux.js.org/)
 - **Deployment**: [Netlify](https://www.netlify.com/)
 
-## Running Locally
+## Running Localy
 
 ```bash
 $ git clone https://github.com/Selimology/Movie-Information-Platform.git
